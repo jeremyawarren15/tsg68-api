@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+tsg68-api
 
 # Test binary, built with `go test -c`
 *.test
@@ -16,3 +17,5 @@
 
 # Pocketbase related files and folders
 pb_data
+
+.DS_Store

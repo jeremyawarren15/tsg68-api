@@ -1,4 +1,3 @@
-# flyctl launch added from .gitignore
 # Binaries for programs and plugins
 **/*.exe
 **/*.exe~
@@ -18,3 +17,5 @@
 # Pocketbase related files and folders
 **/pb_data
 fly.toml
+
+.DS_Store
