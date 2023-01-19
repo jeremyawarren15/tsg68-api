@@ -10,6 +10,7 @@ import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/models"
+	"github.com/samber/lo"
 )
 
 type EventResponse struct {
@@ -40,11 +41,38 @@ func main() {
 				RequireValidatedRecordAuth(),
 			},
 		})
+
 		e.Router.AddRoute(echo.Route{
 			Method: http.MethodGet,
-			Path:   "/response/:slug",
+			Path:   "/events/:slug/response",
 			Handler: func(c echo.Context) error {
 				user, _ := c.Get(apis.ContextAuthRecordKey).(*models.Record)
+				event, err := app.Dao().FindFirstRecordByData("events", "slug", c.PathParam("slug"))
+				if err != nil {
+					return apis.NewNotFoundError("The event does not exist.", err)
+				}
+
+				responses, err := app.Dao().FindRecordsByExpr("responses", dbx.HashExp{"event": event.Id, "user": user.Id})
+				if err != nil {
+					return err
+				}
+
+				if len(responses) > 0 {
+					return c.JSON(200, responses[0].GetString("response"))
+				}
+
+				return c.JSON(200, "pending")
+			},
+			Middlewares: []echo.MiddlewareFunc{
+				apis.ActivityLogger(app),
+				RequireValidatedRecordAuth(),
+			},
+		})
+
+		e.Router.AddRoute(echo.Route{
+			Method: http.MethodGet,
+			Path:   "/events/:slug/attending",
+			Handler: func(c echo.Context) error {
 				event, err := app.Dao().FindFirstRecordByData("events", "slug", c.PathParam("slug"))
 				if err != nil {
 					return apis.NewNotFoundError("The event does not exist.", err)
@@ -56,8 +84,7 @@ func main() {
 				}
 
 				query := app.Dao().RecordQuery(responses).
-					AndWhere(dbx.HashExp{"event": event.Id, "user": user.Id}).
-					Limit(1)
+					AndWhere(dbx.HashExp{"event": event.Id, "response": "attending"})
 
 				rows := []dbx.NullStringMap{}
 				if err := query.All(&rows); err != nil {
@@ -65,11 +92,17 @@ func main() {
 				}
 
 				existingResponses := models.NewRecordsFromNullStringMaps(responses, rows)
-				if len(existingResponses) > 0 {
-					return c.JSON(200, existingResponses[0].GetString("response"))
-				}
+				userIds := lo.Map(existingResponses, func(x *models.Record, index int) string {
+					return x.GetString("user")
+				})
 
-				return c.JSON(200, "pending")
+				records, err := app.Dao().FindRecordsByIds("users", userIds)
+
+				names := lo.Map(records, func(x *models.Record, index int) string {
+					return x.GetString("name")
+				})
+
+				return c.JSON(200, names)
 			},
 			Middlewares: []echo.MiddlewareFunc{
 				apis.ActivityLogger(app),
