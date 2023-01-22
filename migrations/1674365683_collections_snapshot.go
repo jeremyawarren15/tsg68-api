@@ -14,8 +14,8 @@ func init() {
 		jsonData := `[
 			{
 				"id": "_pb_users_auth_",
-				"created": "2023-01-19 17:56:39.736Z",
-				"updated": "2023-01-19 18:43:27.537Z",
+				"created": "2023-01-22 04:43:19.943Z",
+				"updated": "2023-01-22 04:44:14.778Z",
 				"name": "users",
 				"type": "auth",
 				"system": false,
@@ -85,8 +85,8 @@ func init() {
 			},
 			{
 				"id": "jovjo7m6f629yvk",
-				"created": "2023-01-19 18:43:27.538Z",
-				"updated": "2023-01-19 18:43:27.538Z",
+				"created": "2023-01-22 04:44:14.779Z",
+				"updated": "2023-01-22 04:44:14.779Z",
 				"name": "events",
 				"type": "base",
 				"system": false,
@@ -177,8 +177,8 @@ func init() {
 			},
 			{
 				"id": "h73uugxedsps7c1",
-				"created": "2023-01-19 18:43:27.538Z",
-				"updated": "2023-01-19 18:43:27.538Z",
+				"created": "2023-01-22 04:44:14.781Z",
+				"updated": "2023-01-22 04:44:14.781Z",
 				"name": "responses",
 				"type": "base",
 				"system": false,
@@ -235,8 +235,8 @@ func init() {
 			},
 			{
 				"id": "53cglz61bvuscz5",
-				"created": "2023-01-19 18:43:27.538Z",
-				"updated": "2023-01-19 18:43:27.538Z",
+				"created": "2023-01-22 04:44:14.782Z",
+				"updated": "2023-01-22 04:44:14.782Z",
 				"name": "updates",
 				"type": "base",
 				"system": false,
@@ -303,8 +303,8 @@ func init() {
 			},
 			{
 				"id": "vq5g8oclfzj2e8q",
-				"created": "2023-01-19 18:43:27.538Z",
-				"updated": "2023-01-19 18:43:27.538Z",
+				"created": "2023-01-22 04:44:14.783Z",
+				"updated": "2023-01-22 04:44:14.783Z",
 				"name": "faqs",
 				"type": "base",
 				"system": false,
@@ -345,8 +345,8 @@ func init() {
 			},
 			{
 				"id": "cuhgk0tdswo9nqx",
-				"created": "2023-01-19 18:43:27.538Z",
-				"updated": "2023-01-19 18:43:27.538Z",
+				"created": "2023-01-22 04:44:14.784Z",
+				"updated": "2023-01-22 04:44:14.784Z",
 				"name": "cadets",
 				"type": "base",
 				"system": false,
