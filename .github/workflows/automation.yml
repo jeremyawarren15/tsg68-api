@@ -2,7 +2,7 @@ name: Dockerize Pocketbase Server
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
 
 jobs:
   docker:

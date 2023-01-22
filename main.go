@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	endpoints "github.com/jeremyawarren15/tsg68-api/endpoints"
@@ -13,7 +12,6 @@ import (
 func main() {
 	app := pocketbase.New()
 
-	fmt.Print("Test")
 	migratecmd.MustRegister(app, app.RootCmd, &migratecmd.Options{
 		Automigrate: true,
 	})
